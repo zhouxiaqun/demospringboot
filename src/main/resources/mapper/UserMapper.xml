@@ -1,0 +1,623 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zxq.mapper.UserMapper" >
+  <resultMap id="BaseResultMap" type="com.zxq.model.User" >
+    <id column="FID" property="ID" jdbcType="INTEGER" />
+    <result column="FLoginName" property="loginName" jdbcType="VARCHAR" />
+    <result column="FPassword" property="password" jdbcType="VARCHAR" />
+    <result column="FRealName" property="realName" jdbcType="VARCHAR" />
+    <result column="FPhone" property="phone" jdbcType="VARCHAR" />
+    <result column="FLicenseNo" property="licenseNo" jdbcType="VARCHAR" />
+    <result column="FExtensionNo" property="extensionNo" jdbcType="VARCHAR" />
+    <result column="FWages" property="wages" jdbcType="DECIMAL" />
+    <result column="FEmail" property="email" jdbcType="VARCHAR" />
+    <result column="FEntryTime" property="entryTime" jdbcType="TIMESTAMP" />
+    <result column="FDeptType" property="deptType" jdbcType="INTEGER" />
+    <result column="FLoanEmpID" property="loanEmpID" jdbcType="INTEGER" />
+    <result column="FDeptID" property="deptID" jdbcType="INTEGER" />
+    <result column="FDeptName" property="deptName" jdbcType="VARCHAR" />
+    <result column="FParentID" property="parentID" jdbcType="INTEGER" />
+    <result column="FParentName" property="parentName" jdbcType="VARCHAR" />
+    <result column="FProvinceCode" property="provinceCode" jdbcType="INTEGER" />
+    <result column="FProvinceName" property="provinceName" jdbcType="VARCHAR" />
+    <result column="FCityCode" property="cityCode" jdbcType="INTEGER" />
+    <result column="FCityName" property="cityName" jdbcType="VARCHAR" />
+    <result column="FRemark" property="remark" jdbcType="VARCHAR" />
+    <result column="FIsEnable" property="isEnable" jdbcType="BIT" />
+    <result column="FIsTest" property="isTest" jdbcType="BIT" />
+    <result column="FCreateTime" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="FModifyTime" property="modifyTime" jdbcType="TIMESTAMP" />
+    <result column="FLastAccessTime" property="lastAccessTime" jdbcType="TIMESTAMP" />
+    <result column="FPortrait" property="portrait" jdbcType="VARCHAR" />
+    <result column="FIsAgent" property="isAgent" jdbcType="BIT" />
+    <result column="FIsOpenNotice" property="isOpenNotice" jdbcType="BIT" />
+    <result column="FLoginPort" property="loginPort" jdbcType="VARCHAR" />
+    <result column="FDeviceName" property="deviceName" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    FID, FLoginName, FPassword, FRealName, FPhone, FLicenseNo, FExtensionNo, FWages, 
+    FEmail, FEntryTime, FDeptType, FLoanEmpID, FDeptID, FDeptName, FParentID, FParentName, 
+    FProvinceCode, FProvinceName, FCityCode, FCityName, FRemark, FIsEnable, FIsTest, 
+    FCreateTime, FModifyTime, FLastAccessTime, FPortrait, FIsAgent, FIsOpenNotice, FLoginPort, 
+    FDeviceName
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zxq.model.UserExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_user
+    where FID = #{ID,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_user
+    where FID = #{ID,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.zxq.model.UserExample" >
+    delete from t_user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.zxq.model.User" >
+    <selectKey resultType="java.lang.Integer" keyProperty="ID" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into t_user (FLoginName, FPassword, FRealName, 
+      FPhone, FLicenseNo, FExtensionNo, 
+      FWages, FEmail, FEntryTime, 
+      FDeptType, FLoanEmpID, FDeptID, 
+      FDeptName, FParentID, FParentName, 
+      FProvinceCode, FProvinceName, FCityCode, 
+      FCityName, FRemark, FIsEnable, 
+      FIsTest, FCreateTime, FModifyTime, 
+      FLastAccessTime, FPortrait, FIsAgent, 
+      FIsOpenNotice, FLoginPort, FDeviceName
+      )
+    values (#{loginName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{realName,jdbcType=VARCHAR}, 
+      #{phone,jdbcType=VARCHAR}, #{licenseNo,jdbcType=VARCHAR}, #{extensionNo,jdbcType=VARCHAR}, 
+      #{wages,jdbcType=DECIMAL}, #{email,jdbcType=VARCHAR}, #{entryTime,jdbcType=TIMESTAMP}, 
+      #{deptType,jdbcType=INTEGER}, #{loanEmpID,jdbcType=INTEGER}, #{deptID,jdbcType=INTEGER}, 
+      #{deptName,jdbcType=VARCHAR}, #{parentID,jdbcType=INTEGER}, #{parentName,jdbcType=VARCHAR}, 
+      #{provinceCode,jdbcType=INTEGER}, #{provinceName,jdbcType=VARCHAR}, #{cityCode,jdbcType=INTEGER}, 
+      #{cityName,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{isEnable,jdbcType=BIT}, 
+      #{isTest,jdbcType=BIT}, #{createTime,jdbcType=TIMESTAMP}, #{modifyTime,jdbcType=TIMESTAMP}, 
+      #{lastAccessTime,jdbcType=TIMESTAMP}, #{portrait,jdbcType=VARCHAR}, #{isAgent,jdbcType=BIT}, 
+      #{isOpenNotice,jdbcType=BIT}, #{loginPort,jdbcType=VARCHAR}, #{deviceName,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zxq.model.User" >
+    <selectKey resultType="java.lang.Integer" keyProperty="ID" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into t_user
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="loginName != null" >
+        FLoginName,
+      </if>
+      <if test="password != null" >
+        FPassword,
+      </if>
+      <if test="realName != null" >
+        FRealName,
+      </if>
+      <if test="phone != null" >
+        FPhone,
+      </if>
+      <if test="licenseNo != null" >
+        FLicenseNo,
+      </if>
+      <if test="extensionNo != null" >
+        FExtensionNo,
+      </if>
+      <if test="wages != null" >
+        FWages,
+      </if>
+      <if test="email != null" >
+        FEmail,
+      </if>
+      <if test="entryTime != null" >
+        FEntryTime,
+      </if>
+      <if test="deptType != null" >
+        FDeptType,
+      </if>
+      <if test="loanEmpID != null" >
+        FLoanEmpID,
+      </if>
+      <if test="deptID != null" >
+        FDeptID,
+      </if>
+      <if test="deptName != null" >
+        FDeptName,
+      </if>
+      <if test="parentID != null" >
+        FParentID,
+      </if>
+      <if test="parentName != null" >
+        FParentName,
+      </if>
+      <if test="provinceCode != null" >
+        FProvinceCode,
+      </if>
+      <if test="provinceName != null" >
+        FProvinceName,
+      </if>
+      <if test="cityCode != null" >
+        FCityCode,
+      </if>
+      <if test="cityName != null" >
+        FCityName,
+      </if>
+      <if test="remark != null" >
+        FRemark,
+      </if>
+      <if test="isEnable != null" >
+        FIsEnable,
+      </if>
+      <if test="isTest != null" >
+        FIsTest,
+      </if>
+      <if test="createTime != null" >
+        FCreateTime,
+      </if>
+      <if test="modifyTime != null" >
+        FModifyTime,
+      </if>
+      <if test="lastAccessTime != null" >
+        FLastAccessTime,
+      </if>
+      <if test="portrait != null" >
+        FPortrait,
+      </if>
+      <if test="isAgent != null" >
+        FIsAgent,
+      </if>
+      <if test="isOpenNotice != null" >
+        FIsOpenNotice,
+      </if>
+      <if test="loginPort != null" >
+        FLoginPort,
+      </if>
+      <if test="deviceName != null" >
+        FDeviceName,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="loginName != null" >
+        #{loginName,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="realName != null" >
+        #{realName,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="licenseNo != null" >
+        #{licenseNo,jdbcType=VARCHAR},
+      </if>
+      <if test="extensionNo != null" >
+        #{extensionNo,jdbcType=VARCHAR},
+      </if>
+      <if test="wages != null" >
+        #{wages,jdbcType=DECIMAL},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="entryTime != null" >
+        #{entryTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deptType != null" >
+        #{deptType,jdbcType=INTEGER},
+      </if>
+      <if test="loanEmpID != null" >
+        #{loanEmpID,jdbcType=INTEGER},
+      </if>
+      <if test="deptID != null" >
+        #{deptID,jdbcType=INTEGER},
+      </if>
+      <if test="deptName != null" >
+        #{deptName,jdbcType=VARCHAR},
+      </if>
+      <if test="parentID != null" >
+        #{parentID,jdbcType=INTEGER},
+      </if>
+      <if test="parentName != null" >
+        #{parentName,jdbcType=VARCHAR},
+      </if>
+      <if test="provinceCode != null" >
+        #{provinceCode,jdbcType=INTEGER},
+      </if>
+      <if test="provinceName != null" >
+        #{provinceName,jdbcType=VARCHAR},
+      </if>
+      <if test="cityCode != null" >
+        #{cityCode,jdbcType=INTEGER},
+      </if>
+      <if test="cityName != null" >
+        #{cityName,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="isEnable != null" >
+        #{isEnable,jdbcType=BIT},
+      </if>
+      <if test="isTest != null" >
+        #{isTest,jdbcType=BIT},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyTime != null" >
+        #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastAccessTime != null" >
+        #{lastAccessTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="portrait != null" >
+        #{portrait,jdbcType=VARCHAR},
+      </if>
+      <if test="isAgent != null" >
+        #{isAgent,jdbcType=BIT},
+      </if>
+      <if test="isOpenNotice != null" >
+        #{isOpenNotice,jdbcType=BIT},
+      </if>
+      <if test="loginPort != null" >
+        #{loginPort,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceName != null" >
+        #{deviceName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zxq.model.UserExample" resultType="java.lang.Integer" >
+    select count(*) from t_user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_user
+    <set >
+      <if test="record.ID != null" >
+        FID = #{record.ID,jdbcType=INTEGER},
+      </if>
+      <if test="record.loginName != null" >
+        FLoginName = #{record.loginName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.password != null" >
+        FPassword = #{record.password,jdbcType=VARCHAR},
+      </if>
+      <if test="record.realName != null" >
+        FRealName = #{record.realName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.phone != null" >
+        FPhone = #{record.phone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.licenseNo != null" >
+        FLicenseNo = #{record.licenseNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.extensionNo != null" >
+        FExtensionNo = #{record.extensionNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wages != null" >
+        FWages = #{record.wages,jdbcType=DECIMAL},
+      </if>
+      <if test="record.email != null" >
+        FEmail = #{record.email,jdbcType=VARCHAR},
+      </if>
+      <if test="record.entryTime != null" >
+        FEntryTime = #{record.entryTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.deptType != null" >
+        FDeptType = #{record.deptType,jdbcType=INTEGER},
+      </if>
+      <if test="record.loanEmpID != null" >
+        FLoanEmpID = #{record.loanEmpID,jdbcType=INTEGER},
+      </if>
+      <if test="record.deptID != null" >
+        FDeptID = #{record.deptID,jdbcType=INTEGER},
+      </if>
+      <if test="record.deptName != null" >
+        FDeptName = #{record.deptName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.parentID != null" >
+        FParentID = #{record.parentID,jdbcType=INTEGER},
+      </if>
+      <if test="record.parentName != null" >
+        FParentName = #{record.parentName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.provinceCode != null" >
+        FProvinceCode = #{record.provinceCode,jdbcType=INTEGER},
+      </if>
+      <if test="record.provinceName != null" >
+        FProvinceName = #{record.provinceName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cityCode != null" >
+        FCityCode = #{record.cityCode,jdbcType=INTEGER},
+      </if>
+      <if test="record.cityName != null" >
+        FCityName = #{record.cityName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remark != null" >
+        FRemark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isEnable != null" >
+        FIsEnable = #{record.isEnable,jdbcType=BIT},
+      </if>
+      <if test="record.isTest != null" >
+        FIsTest = #{record.isTest,jdbcType=BIT},
+      </if>
+      <if test="record.createTime != null" >
+        FCreateTime = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.modifyTime != null" >
+        FModifyTime = #{record.modifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.lastAccessTime != null" >
+        FLastAccessTime = #{record.lastAccessTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.portrait != null" >
+        FPortrait = #{record.portrait,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isAgent != null" >
+        FIsAgent = #{record.isAgent,jdbcType=BIT},
+      </if>
+      <if test="record.isOpenNotice != null" >
+        FIsOpenNotice = #{record.isOpenNotice,jdbcType=BIT},
+      </if>
+      <if test="record.loginPort != null" >
+        FLoginPort = #{record.loginPort,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deviceName != null" >
+        FDeviceName = #{record.deviceName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_user
+    set FID = #{record.ID,jdbcType=INTEGER},
+      FLoginName = #{record.loginName,jdbcType=VARCHAR},
+      FPassword = #{record.password,jdbcType=VARCHAR},
+      FRealName = #{record.realName,jdbcType=VARCHAR},
+      FPhone = #{record.phone,jdbcType=VARCHAR},
+      FLicenseNo = #{record.licenseNo,jdbcType=VARCHAR},
+      FExtensionNo = #{record.extensionNo,jdbcType=VARCHAR},
+      FWages = #{record.wages,jdbcType=DECIMAL},
+      FEmail = #{record.email,jdbcType=VARCHAR},
+      FEntryTime = #{record.entryTime,jdbcType=TIMESTAMP},
+      FDeptType = #{record.deptType,jdbcType=INTEGER},
+      FLoanEmpID = #{record.loanEmpID,jdbcType=INTEGER},
+      FDeptID = #{record.deptID,jdbcType=INTEGER},
+      FDeptName = #{record.deptName,jdbcType=VARCHAR},
+      FParentID = #{record.parentID,jdbcType=INTEGER},
+      FParentName = #{record.parentName,jdbcType=VARCHAR},
+      FProvinceCode = #{record.provinceCode,jdbcType=INTEGER},
+      FProvinceName = #{record.provinceName,jdbcType=VARCHAR},
+      FCityCode = #{record.cityCode,jdbcType=INTEGER},
+      FCityName = #{record.cityName,jdbcType=VARCHAR},
+      FRemark = #{record.remark,jdbcType=VARCHAR},
+      FIsEnable = #{record.isEnable,jdbcType=BIT},
+      FIsTest = #{record.isTest,jdbcType=BIT},
+      FCreateTime = #{record.createTime,jdbcType=TIMESTAMP},
+      FModifyTime = #{record.modifyTime,jdbcType=TIMESTAMP},
+      FLastAccessTime = #{record.lastAccessTime,jdbcType=TIMESTAMP},
+      FPortrait = #{record.portrait,jdbcType=VARCHAR},
+      FIsAgent = #{record.isAgent,jdbcType=BIT},
+      FIsOpenNotice = #{record.isOpenNotice,jdbcType=BIT},
+      FLoginPort = #{record.loginPort,jdbcType=VARCHAR},
+      FDeviceName = #{record.deviceName,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zxq.model.User" >
+    update t_user
+    <set >
+      <if test="loginName != null" >
+        FLoginName = #{loginName,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        FPassword = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="realName != null" >
+        FRealName = #{realName,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        FPhone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="licenseNo != null" >
+        FLicenseNo = #{licenseNo,jdbcType=VARCHAR},
+      </if>
+      <if test="extensionNo != null" >
+        FExtensionNo = #{extensionNo,jdbcType=VARCHAR},
+      </if>
+      <if test="wages != null" >
+        FWages = #{wages,jdbcType=DECIMAL},
+      </if>
+      <if test="email != null" >
+        FEmail = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="entryTime != null" >
+        FEntryTime = #{entryTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deptType != null" >
+        FDeptType = #{deptType,jdbcType=INTEGER},
+      </if>
+      <if test="loanEmpID != null" >
+        FLoanEmpID = #{loanEmpID,jdbcType=INTEGER},
+      </if>
+      <if test="deptID != null" >
+        FDeptID = #{deptID,jdbcType=INTEGER},
+      </if>
+      <if test="deptName != null" >
+        FDeptName = #{deptName,jdbcType=VARCHAR},
+      </if>
+      <if test="parentID != null" >
+        FParentID = #{parentID,jdbcType=INTEGER},
+      </if>
+      <if test="parentName != null" >
+        FParentName = #{parentName,jdbcType=VARCHAR},
+      </if>
+      <if test="provinceCode != null" >
+        FProvinceCode = #{provinceCode,jdbcType=INTEGER},
+      </if>
+      <if test="provinceName != null" >
+        FProvinceName = #{provinceName,jdbcType=VARCHAR},
+      </if>
+      <if test="cityCode != null" >
+        FCityCode = #{cityCode,jdbcType=INTEGER},
+      </if>
+      <if test="cityName != null" >
+        FCityName = #{cityName,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        FRemark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="isEnable != null" >
+        FIsEnable = #{isEnable,jdbcType=BIT},
+      </if>
+      <if test="isTest != null" >
+        FIsTest = #{isTest,jdbcType=BIT},
+      </if>
+      <if test="createTime != null" >
+        FCreateTime = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyTime != null" >
+        FModifyTime = #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastAccessTime != null" >
+        FLastAccessTime = #{lastAccessTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="portrait != null" >
+        FPortrait = #{portrait,jdbcType=VARCHAR},
+      </if>
+      <if test="isAgent != null" >
+        FIsAgent = #{isAgent,jdbcType=BIT},
+      </if>
+      <if test="isOpenNotice != null" >
+        FIsOpenNotice = #{isOpenNotice,jdbcType=BIT},
+      </if>
+      <if test="loginPort != null" >
+        FLoginPort = #{loginPort,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceName != null" >
+        FDeviceName = #{deviceName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where FID = #{ID,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zxq.model.User" >
+    update t_user
+    set FLoginName = #{loginName,jdbcType=VARCHAR},
+      FPassword = #{password,jdbcType=VARCHAR},
+      FRealName = #{realName,jdbcType=VARCHAR},
+      FPhone = #{phone,jdbcType=VARCHAR},
+      FLicenseNo = #{licenseNo,jdbcType=VARCHAR},
+      FExtensionNo = #{extensionNo,jdbcType=VARCHAR},
+      FWages = #{wages,jdbcType=DECIMAL},
+      FEmail = #{email,jdbcType=VARCHAR},
+      FEntryTime = #{entryTime,jdbcType=TIMESTAMP},
+      FDeptType = #{deptType,jdbcType=INTEGER},
+      FLoanEmpID = #{loanEmpID,jdbcType=INTEGER},
+      FDeptID = #{deptID,jdbcType=INTEGER},
+      FDeptName = #{deptName,jdbcType=VARCHAR},
+      FParentID = #{parentID,jdbcType=INTEGER},
+      FParentName = #{parentName,jdbcType=VARCHAR},
+      FProvinceCode = #{provinceCode,jdbcType=INTEGER},
+      FProvinceName = #{provinceName,jdbcType=VARCHAR},
+      FCityCode = #{cityCode,jdbcType=INTEGER},
+      FCityName = #{cityName,jdbcType=VARCHAR},
+      FRemark = #{remark,jdbcType=VARCHAR},
+      FIsEnable = #{isEnable,jdbcType=BIT},
+      FIsTest = #{isTest,jdbcType=BIT},
+      FCreateTime = #{createTime,jdbcType=TIMESTAMP},
+      FModifyTime = #{modifyTime,jdbcType=TIMESTAMP},
+      FLastAccessTime = #{lastAccessTime,jdbcType=TIMESTAMP},
+      FPortrait = #{portrait,jdbcType=VARCHAR},
+      FIsAgent = #{isAgent,jdbcType=BIT},
+      FIsOpenNotice = #{isOpenNotice,jdbcType=BIT},
+      FLoginPort = #{loginPort,jdbcType=VARCHAR},
+      FDeviceName = #{deviceName,jdbcType=VARCHAR}
+    where FID = #{ID,jdbcType=INTEGER}
+  </update>
+</mapper>
