@@ -8,6 +8,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.cloud.netflix.eureka.server.EnableEurekaServer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
@@ -21,6 +22,7 @@ import javax.sql.DataSource;
 @EnableAutoConfiguration
 @ComponentScan
 @MapperScan("com.zxq.mapper")
+@EnableEurekaServer
 public class DemoSpringbootApplication {
 
 	public static void main(String[] args) {
