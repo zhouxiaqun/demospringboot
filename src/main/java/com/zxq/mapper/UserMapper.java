@@ -3,7 +3,9 @@ package com.zxq.mapper;
 import com.zxq.model.User;
 import com.zxq.model.UserExample;
 import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
+
 
 public interface UserMapper {
     int countByExample(UserExample example);
